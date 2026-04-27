@@ -1,0 +1,5 @@
+# Stitch local state — IDE/design-tool working files, not part of the site
+.stitch/
+
+# macOS
+.DS_Store
