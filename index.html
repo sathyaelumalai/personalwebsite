@@ -108,8 +108,8 @@
       </p>
 
       <div class="hero__cta">
-        <a href="#connect" class="btn btn--solid">
-          <span class="btn__label">Request a deployment briefing</span>
+        <a href="#mission" class="btn btn--solid">
+          <span class="btn__label">Learn more</span>
           <svg class="btn__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
         <a class="btn btn--ghost-dark" href="https://www.youtube.com/watch?v=l9KVmZAAGaM" target="_blank" rel="noopener noreferrer">
@@ -255,12 +255,7 @@
   </div>
 
   <div class="mission__close" aria-label="Mission promise">
-    <div class="mission__close-pulse" aria-hidden="true">
-      <svg viewBox="0 0 600 80" preserveAspectRatio="none" width="100%" height="100%">
-        <path d="M0 40 L120 40 L150 40 L160 20 L175 60 L195 5 L215 75 L235 30 L260 40 L320 40 L340 28 L355 52 L375 40 L600 40"
-              fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
+    <canvas class="mission__shader" id="missionShader" aria-hidden="true"></canvas>
     <p class="mission__close-text">
       <span class="word">Early</span>
       <span class="word">detection</span>
@@ -280,16 +275,18 @@
     <div class="work-device__copy reveal">
       <div class="section-eyebrow"><span class="t-micro">The Device</span></div>
       <h2 class="work-device__title" id="workTitle">Ten clinical-grade vitals.<br><em>Sixty seconds. Anywhere.</em></h2>
-      <p class="work-device__lede">MouthLab is a single handheld device that captures a comprehensive health snapshot in under sixty seconds, replacing an entire drawer of monitoring tools. Dr. Gene Fridman, the co-inventor, calls it <em>"a check engine light for humans."</em></p>
+      <p class="work-device__lede">MouthLab is a single handheld device that captures a comprehensive health snapshot in under sixty seconds, replacing an entire drawer of monitoring tools. It is essentially <em>"a check engine light for humans."</em></p>
       <ul class="work-device__vitals" role="list" aria-label="MouthLab signal set">
         <li>Temperature</li>
-        <li>Pulse</li>
+        <li>Pulse Rate</li>
         <li>SpO2</li>
         <li>Respiration</li>
-        <li>Blood pressure</li>
+        <li>Heart Rate</li>
+        <li>Heart Rate Variability</li>
         <li>ECG</li>
-        <li>Breathing flow</li>
-        <li class="is-pulse">AIDI™ risk</li>
+        <li>FEV1</li>
+        <li>PEF</li>
+        <li class="is-pulse">AIDI™</li>
       </ul>
       <a href="#connect" class="btn btn--ghost">
         <span class="btn__label">Request a deployment briefing</span>
@@ -337,7 +334,7 @@
         <p class="platform-card__num">i.</p>
         <h3 class="platform-card__title">Aidar Connect</h3>
         <p class="platform-card__sub">For physicians</p>
-        <p class="platform-card__copy">Longitudinal trends, deterioration alerts, and AIDI™ risk index, surfaced where clinical decisions are actually made. Integrates with PointClickCare and MatrixCare.</p>
+        <p class="platform-card__copy">Longitudinal trends, deterioration alerts, and the AIDI™ index, surfaced where clinical decisions are actually made. Integrates with PointClickCare and MatrixCare.</p>
       </article>
 
       <article class="platform-card reveal">
@@ -656,8 +653,19 @@
   </div>
 
   <div class="speaking-quote reveal">
-    <blockquote>"Sathya speaks from the place most founders try to hide: the pain, the patient story, and the hard operational reality of building something that has to work."</blockquote>
-    <cite>Conference organizer</cite>
+    <div class="speaking-quote__art" aria-hidden="true">
+      <p class="speaking-quote__art-label">Live signal</p>
+      <svg class="speaking-quote__wave" viewBox="0 0 420 120" preserveAspectRatio="none">
+        <path d="M0 62 H78 L90 62 L100 34 L116 92 L136 12 L158 106 L178 52 L204 62 H260 L278 44 L294 82 L312 62 H420" />
+      </svg>
+      <span>pain</span>
+      <span>proof</span>
+      <span>practice</span>
+    </div>
+    <div class="speaking-quote__body">
+      <blockquote>"Sathya speaks from the place most founders try to hide: the pain, the patient story, and the hard operational reality of building something that has to work."</blockquote>
+      <cite>Conference organizer</cite>
+    </div>
   </div>
 </section>
 
@@ -749,32 +757,32 @@
     <div class="interests__head">
       <p class="t-micro pulse">— Other interests &amp; research</p>
       <h2 class="interests__title" id="interestsTitle">Where my curiosity goes.</h2>
-      <p class="interests__lede">Beyond Aidar, the work that keeps pulling me forward. Doctoral research, federally funded science, AI in clinical practice, and the reviewer roles that keep me close to the field.</p>
+      <p class="interests__lede">Beyond Aidar, the questions that keep pulling me forward: how new sensing, better software, and simpler regulatory systems can make care feel more human.</p>
     </div>
 
     <div class="interests__grid">
       <article class="interest-card reveal">
         <p class="interest-card__num">01</p>
-        <h3 class="interest-card__title">AI in Chronic Care</h3>
-        <p class="interest-card__copy">The honest version of what AI can and cannot do at the bedside. AIDI™ is the working answer for chronic-disease decompensation, but the broader question is how to evaluate and deploy clinical AI without breaking the trust the field needs to earn.</p>
+        <h3 class="interest-card__title">Next-Generation Medical Devices</h3>
+        <p class="interest-card__copy">The future of care will be shaped by devices that feel simple to patients but carry clinical-grade intelligence underneath: faster readings, fewer steps, and better signals at the point of need.</p>
       </article>
 
       <article class="interest-card reveal">
         <p class="interest-card__num">02</p>
-        <h3 class="interest-card__title">Doctor of Public Health</h3>
-        <p class="interest-card__copy">Currently pursuing a DrPH at the Johns Hopkins Bloomberg School of Public Health. Research focus: the intersection of remote patient monitoring, health equity, and chronic-disease management at population scale.</p>
+        <h3 class="interest-card__title">Breath &amp; Saliva-Based Sensors</h3>
+        <p class="interest-card__copy">Breath, saliva, and other non-invasive signals can open a new category of monitoring: less friction for the patient, richer longitudinal data for clinicians, and earlier warning before symptoms become crises.</p>
       </article>
 
       <article class="interest-card reveal">
         <p class="interest-card__num">03</p>
-        <h3 class="interest-card__title">Federally Funded Science</h3>
-        <p class="interest-card__copy">NSF STTR Phase II for non-invasive CKD monitoring. BARDA contract for COVID-19 decompensation. The published protocol for the Aidar Decompensation Index in JMIR Research Protocols (2025). Where peer-reviewed methodology meets real deployments.</p>
+        <h3 class="interest-card__title">Patient Experience Software</h3>
+        <p class="interest-card__copy">Hospitals and long-term care facilities need mobile tools that make patients and families feel seen, while helping nurses and clinicians move faster with less administrative burden.</p>
       </article>
 
       <article class="interest-card reveal">
         <p class="interest-card__num">04</p>
-        <h3 class="interest-card__title">Reviewer &amp; Advocate</h3>
-        <p class="interest-card__copy">NIH SBIR reviewer. NSF SBIR/STTR merit reviewer. PCORI ambassador. Forbes Business Council member. Johns Hopkins Carey Alumni Advisory Board. Lean Six Sigma Green Belt and Patient Safety certifications.</p>
+        <h3 class="interest-card__title">Simpler Quality &amp; Regulatory Affairs</h3>
+        <p class="interest-card__copy">The best regulated products are not slowed by quality systems; they are strengthened by them. I am interested in making compliance clearer, lighter, and more useful for teams building real medical technology.</p>
       </article>
     </div>
   </div>
@@ -1099,6 +1107,110 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io2.unobserve(e.target); } });
     }, { threshold: 0.5 });
     io2.observe(missionClose);
+  }
+
+  /* Mission signal field */
+  const missionCanvas = document.getElementById('missionShader');
+  if (missionCanvas && !reduce) {
+    const ctx = missionCanvas.getContext('2d');
+    if (ctx) {
+      let raf = 0;
+      let running = false;
+      let width = 0;
+      let height = 0;
+      let dpr = 1;
+
+      const resizeMissionCanvas = () => {
+        const rect = missionCanvas.getBoundingClientRect();
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = Math.max(1, rect.width);
+        height = Math.max(1, rect.height);
+        missionCanvas.width = Math.floor(width * dpr);
+        missionCanvas.height = Math.floor(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      };
+
+      const drawSignalField = (time) => {
+        if (!running) return;
+        const t = time * 0.00032;
+        ctx.clearRect(0, 0, width, height);
+
+        for (let line = 0; line < 9; line += 1) {
+          const progress = line / 8;
+          const yBase = height * (0.18 + progress * 0.64);
+          const amp = height * (0.018 + progress * 0.016);
+          const speed = t * (0.8 + progress * 0.6);
+
+          ctx.beginPath();
+          for (let x = -20; x <= width + 20; x += 18) {
+            const nx = x / Math.max(width, 1);
+            const wave =
+              Math.sin(nx * 8.0 + speed + line * 0.7) * amp +
+              Math.sin(nx * 17.0 - speed * 1.4) * amp * 0.36;
+            const y = yBase + wave;
+            if (x === -20) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+
+          ctx.strokeStyle = line % 2 === 0
+            ? `rgba(10, 37, 64, ${0.10 + progress * 0.08})`
+            : `rgba(250, 247, 242, ${0.10 + (1 - progress) * 0.10})`;
+          ctx.lineWidth = line % 2 === 0 ? 1.2 : 0.8;
+          ctx.stroke();
+        }
+
+        for (let dot = 0; dot < 24; dot += 1) {
+          const lane = dot % 8;
+          const phase = (t * 0.14 + dot * 0.043) % 1;
+          const x = phase * (width + 120) - 60;
+          const y = height * (0.18 + lane * 0.092) +
+            Math.sin(phase * Math.PI * 2 + dot * 0.8) * 18;
+          const size = dot % 4 === 0 ? 5.4 : dot % 3 === 0 ? 3.8 : 2.6;
+          const glow = ctx.createRadialGradient(x, y, 0, x, y, size * 5.5);
+          const isInk = dot % 3 === 0;
+          glow.addColorStop(0, isInk ? 'rgba(10, 37, 64, 0.30)' : 'rgba(250, 247, 242, 0.34)');
+          glow.addColorStop(0.42, isInk ? 'rgba(10, 37, 64, 0.12)' : 'rgba(250, 247, 242, 0.14)');
+          glow.addColorStop(1, 'rgba(250, 247, 242, 0)');
+
+          ctx.beginPath();
+          ctx.arc(x, y, size * 5.5, 0, Math.PI * 2);
+          ctx.fillStyle = glow;
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.ellipse(x, y, size * 1.55, size, Math.sin(phase * Math.PI) * 0.7, 0, Math.PI * 2);
+          ctx.fillStyle = isInk ? 'rgba(10, 37, 64, 0.30)' : 'rgba(250, 247, 242, 0.38)';
+          ctx.fill();
+        }
+
+        raf = requestAnimationFrame(drawSignalField);
+      };
+
+      const startMissionShader = () => {
+        if (running) return;
+        running = true;
+        resizeMissionCanvas();
+        raf = requestAnimationFrame(drawSignalField);
+      };
+
+      const stopMissionShader = () => {
+        running = false;
+        cancelAnimationFrame(raf);
+      };
+
+      window.addEventListener('resize', resizeMissionCanvas);
+      if ('IntersectionObserver' in window) {
+        const shaderObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) startMissionShader();
+            else stopMissionShader();
+          });
+        }, { threshold: 0.12 });
+        shaderObserver.observe(missionCanvas);
+      } else {
+        startMissionShader();
+      }
+    }
   }
 
   /* Stat count-up */
