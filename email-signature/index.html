@@ -44,7 +44,7 @@
     letter-spacing: -0.01em; color: var(--anchor); margin-bottom: 12px;
   }
   h1 em { font-style: italic; color: var(--pulse); }
-  .lede { font-size: 17px; color: var(--ink-soft); max-width: 60ch; margin-bottom: 36px; }
+  .lede { font-size: 17px; color: var(--ink-soft); max-width: 62ch; margin-bottom: 36px; }
 
   .card {
     background: #fff; border: 1px solid var(--mist); border-radius: 16px;
@@ -79,10 +79,23 @@
   .status--ok .status__dot       { background: var(--sage); }
   .status--missing .status__dot  { background: var(--alert); }
 
+  /* ---- Segmented control (signature variant) ---- */
+  .seg {
+    display: inline-flex; gap: 4px; background: var(--bone-soft);
+    padding: 5px; border-radius: 12px; margin-bottom: 26px;
+  }
+  .seg-opt {
+    font-family: var(--font-body); font-size: 13px; font-weight: 600;
+    padding: 9px 20px; border-radius: 8px; border: 0; background: transparent;
+    color: var(--ink-soft); cursor: pointer; transition: all 160ms ease;
+  }
+  .seg-opt:hover { color: var(--anchor); }
+  .seg-opt.is-active { background: #fff; color: var(--anchor); box-shadow: 0 1px 3px rgba(10,37,64,0.14); }
+
   /* ---- Logo style toggle ---- */
   .logo-toggle {
     display: flex; align-items: center; gap: 8px; margin-top: 22px;
-    padding-top: 22px; border-top: 1px solid var(--mist);
+    padding-top: 22px; border-top: 1px solid var(--mist); flex-wrap: wrap;
   }
   .logo-toggle__label {
     font-size: 12px; font-weight: 600; color: var(--ink-muted);
@@ -100,12 +113,12 @@
 
   /* ---- Buttons ---- */
   .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
-  button {
+  button.act {
     font-family: var(--font-body); font-size: 14px; font-weight: 600;
     border-radius: 10px; padding: 12px 22px; cursor: pointer; border: 1px solid transparent;
     transition: transform 180ms cubic-bezier(0.16,1,0.3,1), background 180ms, color 180ms;
   }
-  button:active { transform: scale(0.98); }
+  button.act:active { transform: scale(0.98); }
   .btn--primary { background: var(--anchor); color: var(--bone); }
   .btn--primary:hover { background: #06192c; }
   .btn--ghost { background: transparent; color: var(--anchor); border-color: var(--mist); }
@@ -152,10 +165,10 @@
 <div class="wrap">
 
   <p class="eyebrow">Internal · Not indexed</p>
-  <h1>Your email <em>signature</em>.</h1>
-  <p class="lede">Copy the signature below straight into Gmail. The images are loaded from your own site, so they will never show up as broken files in a recipient's inbox.</p>
+  <h1>Your email <em>signatures</em>.</h1>
+  <p class="lede">Two signatures — one for Aidar, one for your Johns Hopkins doctorate. Pick a variant, choose your logo style, copy, and paste straight into Gmail. The images load from your own site, so they will never show up as broken files in a recipient's inbox.</p>
 
-  <!-- Live hosting check: tells you instantly whether the two images resolve -->
+  <!-- Live hosting check: tells you instantly whether the images resolve -->
   <div class="status status--checking" id="status" role="status" aria-live="polite">
     <span class="status__dot" id="statusDot">…</span>
     <div id="statusText">Checking whether your signature images are live on the server…</div>
@@ -165,36 +178,78 @@
   <div class="card">
     <p class="card__label">Live preview</p>
 
-    <!-- This is the exact markup that gets copied. Table-based + inline styles = email-client safe. -->
+    <!-- Signature variant switch -->
+    <div class="seg" role="radiogroup" aria-label="Signature type">
+      <button type="button" class="seg-opt is-active" data-variant="company" role="radio" aria-checked="true">Company</button>
+      <button type="button" class="seg-opt" data-variant="academic" role="radio" aria-checked="false">Academic · DrPH</button>
+    </div>
+
+    <!-- The exact markup that gets copied. Table-based + inline styles = email-client safe. -->
     <div id="signature">
-      <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="font-family: Arial, Helvetica, sans-serif; color: #1A1A1A; border-collapse: collapse;">
-        <tr>
-          <td style="vertical-align: top; padding: 0 20px 0 0;">
-            <img src="/assets/sathya-portrait.png" alt="Sathya Elumalai" width="96" height="96" style="display: block; width: 96px; height: 96px; border: 0; outline: none; text-decoration: none;">
-          </td>
-          <td style="vertical-align: top; padding: 2px 0 2px 22px; border-left: 2px solid #E5673A;">
-            <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 21px; font-weight: 700; color: #0A2540; line-height: 1.1;">Sathya Elumalai</div>
-            <div style="font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #4B4B4B; padding-top: 4px;">Founder &amp; CEO, <strong style="color: #1A1A1A;">Aidar Health</strong></div>
-            <div style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #767676; padding-top: 2px;">Digital Medicine Pioneer &middot; Inventor of MouthLab</div>
 
-            <div style="font-family: Arial, Helvetica, sans-serif; font-size: 13px; padding-top: 12px; line-height: 1.6;">
-              <a href="mailto:contact@aidar.com" style="color: #0A2540; text-decoration: none;">contact@aidar.com</a>
-              <span style="color: #D9DEE3;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-              <a href="https://www.sathyaelumalai.com" style="color: #0A2540; text-decoration: none;">sathyaelumalai.com</a>
-            </div>
-            <div style="font-family: Arial, Helvetica, sans-serif; font-size: 13px; padding-top: 3px; line-height: 1.6;">
-              <a href="https://www.linkedin.com/in/sathyaelumalai" style="color: #E5673A; text-decoration: none; font-weight: 600;">LinkedIn</a>
-              <span style="color: #D9DEE3;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-              <a href="https://x.com/SathyaElumalai" style="color: #E5673A; text-decoration: none; font-weight: 600;">X</a>
-            </div>
+      <!-- ---------- COMPANY VARIANT ---------- -->
+      <div class="sig-block" data-variant="company">
+        <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="font-family: Arial, Helvetica, sans-serif; color: #1A1A1A; border-collapse: collapse;">
+          <tr>
+            <td style="vertical-align: top; padding: 0 18px 0 0;">
+              <img src="/assets/sathya-portrait.png" alt="Sathya Elumalai" width="92" height="92" style="display: block; width: 92px; height: 92px; border: 0; outline: none; text-decoration: none;">
+              <img class="logoImg" src="/assets/aidar-logo-email-animated.gif" alt="Aidar Health" width="92" height="20" style="display: block; width: 92px; height: 20px; border: 0; outline: none; margin-top: 12px;">
+              <div style="font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 11px; color: #4F7A5E; padding-top: 5px;">Breathe. Fight. Live.</div>
+            </td>
+            <td style="vertical-align: top; padding: 1px 0 1px 18px; border-left: 2px solid #E5673A;">
+              <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 18px; font-weight: 700; color: #0A2540; line-height: 1.15;">Sathya Elumalai</div>
+              <div style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #4B4B4B; padding-top: 3px;">Founder &amp; CEO, <strong style="color: #1A1A1A;">Aidar Health</strong></div>
+              <div style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; padding-top: 11px; line-height: 1.7;">
+                <a href="mailto:selumalai@aidar.com" style="color: #0A2540; text-decoration: none;">selumalai@aidar.com</a>
+                <span style="color: #D9DEE3;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                <a href="tel:+14438756456" style="color: #0A2540; text-decoration: none;">+1 443 875 6456</a>
+              </div>
+              <div style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; padding-top: 5px; line-height: 1.7;">
+                <a href="https://www.aidar.com" style="color: #E5673A; text-decoration: none; font-weight: 600;">aidar.com</a>
+                <span style="color: #D9DEE3;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                <a href="https://www.sathyaelumalai.com" style="color: #E5673A; text-decoration: none; font-weight: 600;">sathyaelumalai.com</a>
+                <span style="color: #D9DEE3;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                <a href="https://www.linkedin.com/in/sathyaelumalai" style="color: #E5673A; text-decoration: none; font-weight: 600;">LinkedIn</a>
+                <span style="color: #D9DEE3;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                <a href="https://x.com/SathyaElumalai" style="color: #E5673A; text-decoration: none; font-weight: 600;">X</a>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
 
-            <div style="padding-top: 16px;">
-              <img id="logoImg" src="/assets/aidar-logo-email-animated.gif" alt="Aidar Health" width="132" height="28" style="display: block; width: 132px; height: 28px; border: 0; outline: none;">
-            </div>
-            <div style="font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 12px; color: #4F7A5E; padding-top: 7px;">Breathe. Fight. Live.</div>
-          </td>
-        </tr>
-      </table>
+      <!-- ---------- ACADEMIC / DrPH VARIANT ---------- -->
+      <div class="sig-block" data-variant="academic" hidden>
+        <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="font-family: Arial, Helvetica, sans-serif; color: #1A1A1A; border-collapse: collapse;">
+          <tr>
+            <td style="vertical-align: top; padding: 0 18px 0 0;">
+              <img src="/assets/sathya-portrait.png" alt="Sathya Elumalai" width="92" height="92" style="display: block; width: 92px; height: 92px; border: 0; outline: none; text-decoration: none;">
+              <img class="logoImg" src="/assets/aidar-logo-email-animated.gif" alt="Aidar Health" width="92" height="20" style="display: block; width: 92px; height: 20px; border: 0; outline: none; margin-top: 12px;">
+              <div style="font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 11px; color: #4F7A5E; padding-top: 5px;">Breathe. Fight. Live.</div>
+            </td>
+            <td style="vertical-align: top; padding: 1px 0 1px 18px; border-left: 2px solid #E5673A;">
+              <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 18px; font-weight: 700; color: #0A2540; line-height: 1.15;">Sathya Elumalai</div>
+              <div style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #4B4B4B; padding-top: 3px; line-height: 1.45;"><strong style="color: #1A1A1A;">DrPH Candidate</strong> &middot; Johns Hopkins Bloomberg School of Public Health</div>
+              <div style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #4B4B4B; padding-top: 2px;">Founder &amp; CEO, <strong style="color: #1A1A1A;">Aidar Health</strong></div>
+              <div style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; padding-top: 11px; line-height: 1.7;">
+                <a href="mailto:selumal1@jh.edu" style="color: #0A2540; text-decoration: none;">selumal1@jh.edu</a>
+                <span style="color: #D9DEE3;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                <a href="tel:+14438756456" style="color: #0A2540; text-decoration: none;">+1 443 875 6456</a>
+              </div>
+              <div style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; padding-top: 5px; line-height: 1.7;">
+                <a href="https://www.aidar.com" style="color: #E5673A; text-decoration: none; font-weight: 600;">aidar.com</a>
+                <span style="color: #D9DEE3;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                <a href="https://www.sathyaelumalai.com" style="color: #E5673A; text-decoration: none; font-weight: 600;">sathyaelumalai.com</a>
+                <span style="color: #D9DEE3;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                <a href="https://www.linkedin.com/in/sathyaelumalai" style="color: #E5673A; text-decoration: none; font-weight: 600;">LinkedIn</a>
+                <span style="color: #D9DEE3;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                <a href="https://x.com/SathyaElumalai" style="color: #E5673A; text-decoration: none; font-weight: 600;">X</a>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
     </div>
 
     <div class="logo-toggle" role="radiogroup" aria-label="Logo style">
@@ -205,8 +260,8 @@
     </div>
 
     <div class="actions">
-      <button class="btn--primary" id="copyBtn">Copy signature</button>
-      <button class="btn--ghost" id="copyHtmlBtn">Copy raw HTML</button>
+      <button class="act btn--primary" id="copyBtn">Copy signature</button>
+      <button class="act btn--ghost" id="copyHtmlBtn">Copy raw HTML</button>
     </div>
 
     <details>
@@ -219,12 +274,12 @@
   <div class="card">
     <p class="card__label">Put it in Gmail</p>
     <ol class="steps">
-      <li>Click <strong>Copy signature</strong> above (it copies the formatted version, images and all).</li>
+      <li>Choose <strong>Company</strong> or <strong>Academic · DrPH</strong> above, pick your logo style, then click <strong>Copy signature</strong>.</li>
       <li>In Gmail, open <strong>Settings → See all settings → General</strong> and scroll to <strong>Signature</strong>.</li>
-      <li>Create a signature (or pick an existing one), click into the box, and <strong>paste</strong> (⌘V / Ctrl+V).</li>
-      <li>Scroll down and click <strong>Save Changes</strong>. Send yourself a test email to confirm the images load.</li>
+      <li>Click <strong>Create new</strong>, name it (e.g. "Aidar" or "Johns Hopkins"), click into the box, and <strong>paste</strong> (⌘V / Ctrl+V).</li>
+      <li>Repeat for the second signature. Set your <strong>defaults</strong> for new emails and replies, then click <strong>Save Changes</strong> and send yourself a test.</li>
     </ol>
-    <p style="font-size: 13px; color: var(--ink-muted); margin-top: 8px;">Tip: if an image shows as broken, it usually means that file is not yet uploaded to <code>/assets/</code> on the live site — see the status banner at the top of this page.</p>
+    <p style="font-size: 13px; color: var(--ink-muted); margin-top: 8px;">Gmail stores multiple named signatures and lets you switch between them from the compose toolbar. If an image ever shows as broken, that file is not reachable under <code>/assets/</code> on the live site — see the status banner up top.</p>
   </div>
 
   <p class="foot">This page lives at <a href="https://www.sathyaelumalai.com/email-signature">sathyaelumalai.com/email-signature</a> and is hidden from search engines.</p>
@@ -241,29 +296,37 @@
     logoStatic: "/assets/aidar-logo-email.png"
   };
 
-  // ---- Plain-text fallback (for clients that ignore the HTML part) ----
-  const PLAIN = [
-    "Sathya Elumalai",
-    "Founder & CEO, Aidar Health",
-    "Digital Medicine Pioneer · Inventor of MouthLab",
-    "contact@aidar.com | sathyaelumalai.com",
-    "LinkedIn: linkedin.com/in/sathyaelumalai | X: @SathyaElumalai"
-  ].join("\n");
+  // ---- Plain-text fallback per variant (for clients that ignore the HTML part) ----
+  const PLAIN = {
+    company: [
+      "Sathya Elumalai",
+      "Founder & CEO, Aidar Health",
+      "selumalai@aidar.com | +1 443 875 6456",
+      "aidar.com | sathyaelumalai.com | linkedin.com/in/sathyaelumalai | x.com/SathyaElumalai"
+    ].join("\n"),
+    academic: [
+      "Sathya Elumalai",
+      "DrPH Candidate · Johns Hopkins Bloomberg School of Public Health",
+      "Founder & CEO, Aidar Health",
+      "selumal1@jh.edu | +1 443 875 6456",
+      "aidar.com | sathyaelumalai.com | linkedin.com/in/sathyaelumalai | x.com/SathyaElumalai"
+    ].join("\n")
+  };
 
-  const sigEl   = document.getElementById("signature");
-  const logoImg = document.getElementById("logoImg");
-  const rawTa   = document.getElementById("rawHtml");
+  let currentVariant = "company";
+  const rawTa = document.getElementById("rawHtml");
 
-  // Take the live preview markup and rewrite root-relative /assets/ paths to
+  function activeBlock() { return document.querySelector('.sig-block[data-variant="' + currentVariant + '"]'); }
+
+  // Take the active variant's markup and rewrite root-relative /assets/ paths to
   // absolute https:// URLs so the signature renders in any inbox.
   function getSigHtml() {
-    return sigEl.innerHTML
+    return activeBlock().innerHTML
       .replace(/src="\/assets\//g, 'src="' + ABSOLUTE_BASE + '/assets/')
       .trim();
   }
 
   function syncRaw() { rawTa.value = getSigHtml(); }
-  syncRaw();
 
   // ---- Rich copy: writes both text/html and text/plain to the clipboard ----
   async function copyRich() {
@@ -272,7 +335,7 @@
       await navigator.clipboard.write([
         new ClipboardItem({
           "text/html": new Blob([html], { type: "text/html" }),
-          "text/plain": new Blob([PLAIN], { type: "text/plain" })
+          "text/plain": new Blob([PLAIN[currentVariant]], { type: "text/plain" })
         })
       ]);
       return true;
@@ -280,7 +343,7 @@
       // Fallback: select the rendered node and use execCommand
       try {
         const range = document.createRange();
-        range.selectNode(sigEl);
+        range.selectNode(activeBlock());
         const sel = window.getSelection();
         sel.removeAllRanges();
         sel.addRange(range);
@@ -291,7 +354,23 @@
     }
   }
 
-  // ---- Logo style toggle (animated GIF vs static PNG) ----
+  // ---- Variant switch (Company vs Academic) ----
+  document.querySelectorAll(".seg-opt").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      currentVariant = btn.dataset.variant;
+      document.querySelectorAll(".seg-opt").forEach((b) => {
+        const on = b === btn;
+        b.classList.toggle("is-active", on);
+        b.setAttribute("aria-checked", on ? "true" : "false");
+      });
+      document.querySelectorAll(".sig-block").forEach((block) => {
+        block.hidden = block.dataset.variant !== currentVariant;
+      });
+      syncRaw();
+    });
+  });
+
+  // ---- Logo style toggle (animated GIF vs static PNG) — applies to both variants ----
   const logoNote = document.getElementById("logoNote");
   document.querySelectorAll(".logo-opt").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -301,7 +380,8 @@
         b.setAttribute("aria-checked", on ? "true" : "false");
       });
       const animated = btn.dataset.logo === "animated";
-      logoImg.src = animated ? ASSETS.logoAnimated : ASSETS.logoStatic;
+      const src = animated ? ASSETS.logoAnimated : ASSETS.logoStatic;
+      document.querySelectorAll("img.logoImg").forEach((img) => { img.src = src; });
       logoNote.textContent = animated
         ? "Shimmers in Gmail & Apple Mail · static in Outlook"
         : "Identical everywhere · lighter file";
@@ -318,21 +398,22 @@
 
   document.getElementById("copyBtn").addEventListener("click", async (e) => {
     const ok = await copyRich();
-    flash(e.target, ok ? "✓ Copied — paste into Gmail" : "Press ⌘C to copy");
+    const name = currentVariant === "company" ? "Company" : "Academic";
+    flash(e.currentTarget, ok ? "✓ " + name + " copied — paste into Gmail" : "Press ⌘C to copy");
   });
 
   document.getElementById("copyHtmlBtn").addEventListener("click", async (e) => {
     try {
       await navigator.clipboard.writeText(getSigHtml());
-      flash(e.target, "✓ HTML copied");
+      flash(e.currentTarget, "✓ HTML copied");
     } catch (err) {
       rawTa.closest("details").open = true;
       rawTa.select();
-      flash(e.target, "Select & copy below");
+      flash(e.currentTarget, "Select & copy below");
     }
   });
 
-  // ---- Live hosting check: probe both image URLs and report ----
+  // ---- Live hosting check: probe the image URLs and report ----
   function probe(url) {
     return new Promise((resolve) => {
       const img = new Image();
@@ -358,7 +439,7 @@
     if (missing.length === 0) {
       status.classList.add("status--ok");
       dot.textContent = "✓";
-      text.innerHTML = "<b>All images are live.</b> Your signature is ready to copy — the portrait and Aidar logo will render in every inbox.";
+      text.innerHTML = "<b>All images are live.</b> Both signatures are ready to copy — the portrait and Aidar logo will render in every inbox.";
     } else {
       status.classList.add("status--missing");
       dot.textContent = "!";
@@ -368,6 +449,9 @@
         (missing.length > 1 ? "they" : "it") + " will show as a broken image in email.";
     }
   })();
+
+  // Initial render
+  syncRaw();
 </script>
 </body>
 </html>
