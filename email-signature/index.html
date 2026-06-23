@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Email Signature · Sathya Elumalai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ---- Page chrome only. The signature itself uses inline, email-safe styles. ---- */
+  :root {
+    --anchor: #0A2540;
+    --pulse:  #E5673A;
+    --bone:   #FAF7F2;
+    --bone-soft: #F2EFE9;
+    --ink:    #1A1A1A;
+    --ink-soft: #4B4B4B;
+    --ink-muted: #767676;
+    --sage:   #4F7A5E;
+    --mist:   #D9DEE3;
+    --alert:  #B83227;
+    --font-display: "Instrument Serif", Georgia, serif;
+    --font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bone);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    padding: clamp(24px, 6vw, 72px) clamp(20px, 5vw, 56px);
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-muted); font-weight: 600; margin-bottom: 14px;
+  }
+  h1 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(34px, 5vw, 52px); line-height: 1.08;
+    letter-spacing: -0.01em; color: var(--anchor); margin-bottom: 12px;
+  }
+  h1 em { font-style: italic; color: var(--pulse); }
+  .lede { font-size: 17px; color: var(--ink-soft); max-width: 60ch; margin-bottom: 36px; }
+
+  .card {
+    background: #fff; border: 1px solid var(--mist); border-radius: 16px;
+    padding: clamp(24px, 4vw, 40px); margin-bottom: 28px;
+  }
+  .card__label {
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-muted); font-weight: 600; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .card__label::after { content: ""; flex: 1; height: 1px; background: var(--mist); }
+
+  /* ---- Hosting status banner ---- */
+  .status {
+    border-radius: 12px; padding: 16px 18px; margin-bottom: 28px;
+    font-size: 14px; display: flex; gap: 12px; align-items: flex-start;
+    border: 1px solid; line-height: 1.5;
+  }
+  .status--checking { background: #FFF8F0; border-color: #F0D9BE; color: #8A5A1F; }
+  .status--ok       { background: #EEF5F0; border-color: #C5DCCC; color: #2E5C3E; }
+  .status--missing  { background: #FBEEEC; border-color: #E9CCC8; color: #8A2A20; }
+  .status b { font-weight: 700; }
+  .status code {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px;
+    background: rgba(0,0,0,0.05); padding: 1px 6px; border-radius: 5px;
+  }
+  .status__dot {
+    width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
+    display: grid; place-items: center; font-size: 11px; font-weight: 700; color: #fff;
+  }
+  .status--checking .status__dot { background: #C98A3C; }
+  .status--ok .status__dot       { background: var(--sage); }
+  .status--missing .status__dot  { background: var(--alert); }
+
+  /* ---- Logo style toggle ---- */
+  .logo-toggle {
+    display: flex; align-items: center; gap: 8px; margin-top: 22px;
+    padding-top: 22px; border-top: 1px solid var(--mist);
+  }
+  .logo-toggle__label {
+    font-size: 12px; font-weight: 600; color: var(--ink-muted);
+    letter-spacing: 0.08em; text-transform: uppercase; margin-right: 4px;
+  }
+  .logo-opt {
+    font-family: var(--font-body); font-size: 13px; font-weight: 600;
+    padding: 7px 16px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--mist); background: transparent; color: var(--ink-soft);
+    transition: all 160ms ease;
+  }
+  .logo-opt:hover { border-color: var(--ink-muted); }
+  .logo-opt.is-active { background: var(--anchor); color: var(--bone); border-color: var(--anchor); }
+  .logo-note { font-size: 12px; color: var(--ink-muted); margin-left: auto; }
+
+  /* ---- Buttons ---- */
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  button {
+    font-family: var(--font-body); font-size: 14px; font-weight: 600;
+    border-radius: 10px; padding: 12px 22px; cursor: pointer; border: 1px solid transparent;
+    transition: transform 180ms cubic-bezier(0.16,1,0.3,1), background 180ms, color 180ms;
+  }
+  button:active { transform: scale(0.98); }
+  .btn--primary { background: var(--anchor); color: var(--bone); }
+  .btn--primary:hover { background: #06192c; }
+  .btn--ghost { background: transparent; color: var(--anchor); border-color: var(--mist); }
+  .btn--ghost:hover { border-color: var(--anchor); }
+  .btn--primary.is-done { background: var(--sage); }
+
+  /* ---- Raw HTML reveal ---- */
+  details { margin-top: 16px; }
+  summary {
+    cursor: pointer; font-size: 13px; font-weight: 600; color: var(--ink-muted);
+    list-style: none; user-select: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: "▸ "; }
+  details[open] summary::before { content: "▾ "; }
+  textarea {
+    width: 100%; min-height: 220px; margin-top: 14px; padding: 16px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; line-height: 1.6;
+    border: 1px solid var(--mist); border-radius: 10px; resize: vertical; color: var(--ink-soft);
+    background: var(--bone-soft);
+  }
+
+  /* ---- Setup steps ---- */
+  ol.steps { counter-reset: step; list-style: none; }
+  ol.steps li {
+    position: relative; padding-left: 44px; margin-bottom: 18px; font-size: 15px; color: var(--ink-soft);
+  }
+  ol.steps li::before {
+    counter-increment: step; content: counter(step);
+    position: absolute; left: 0; top: 0; width: 28px; height: 28px;
+    background: var(--bone-soft); border: 1px solid var(--mist); border-radius: 50%;
+    display: grid; place-items: center; font-size: 13px; font-weight: 700; color: var(--anchor);
+  }
+  ol.steps strong { color: var(--ink); }
+  ol.steps code, p code {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px;
+    background: var(--bone-soft); padding: 2px 7px; border-radius: 5px; color: var(--anchor);
+  }
+  .foot { font-size: 13px; color: var(--ink-muted); margin-top: 40px; text-align: center; }
+  .foot a { color: var(--pulse); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">Internal · Not indexed</p>
+  <h1>Your email <em>signature</em>.</h1>
+  <p class="lede">Copy the signature below straight into Gmail. The images are loaded from your own site, so they will never show up as broken files in a recipient's inbox.</p>
+
+  <!-- Live hosting check: tells you instantly whether the two images resolve -->
+  <div class="status status--checking" id="status" role="status" aria-live="polite">
+    <span class="status__dot" id="statusDot">…</span>
+    <div id="statusText">Checking whether your signature images are live on the server…</div>
+  </div>
+
+  <!-- ====================== SIGNATURE PREVIEW ====================== -->
+  <div class="card">
+    <p class="card__label">Live preview</p>
+
+    <!-- This is the exact markup that gets copied. Table-based + inline styles = email-client safe. -->
+    <div id="signature">
+      <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="font-family: Arial, Helvetica, sans-serif; color: #1A1A1A; border-collapse: collapse;">
+        <tr>
+          <td style="vertical-align: top; padding: 0 20px 0 0;">
+            <img src="/assets/sathya-portrait.png" alt="Sathya Elumalai" width="96" height="96" style="display: block; width: 96px; height: 96px; border: 0; outline: none; text-decoration: none;">
+          </td>
+          <td style="vertical-align: top; padding: 2px 0 2px 22px; border-left: 2px solid #E5673A;">
+            <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 21px; font-weight: 700; color: #0A2540; line-height: 1.1;">Sathya Elumalai</div>
+            <div style="font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #4B4B4B; padding-top: 4px;">Founder &amp; CEO, <strong style="color: #1A1A1A;">Aidar Health</strong></div>
+            <div style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #767676; padding-top: 2px;">Digital Medicine Pioneer &middot; Inventor of MouthLab</div>
+
+            <div style="font-family: Arial, Helvetica, sans-serif; font-size: 13px; padding-top: 12px; line-height: 1.6;">
+              <a href="mailto:contact@aidar.com" style="color: #0A2540; text-decoration: none;">contact@aidar.com</a>
+              <span style="color: #D9DEE3;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+              <a href="https://www.sathyaelumalai.com" style="color: #0A2540; text-decoration: none;">sathyaelumalai.com</a>
+            </div>
+            <div style="font-family: Arial, Helvetica, sans-serif; font-size: 13px; padding-top: 3px; line-height: 1.6;">
+              <a href="https://www.linkedin.com/in/sathyaelumalai" style="color: #E5673A; text-decoration: none; font-weight: 600;">LinkedIn</a>
+              <span style="color: #D9DEE3;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+              <a href="https://x.com/SathyaElumalai" style="color: #E5673A; text-decoration: none; font-weight: 600;">X</a>
+            </div>
+
+            <div style="padding-top: 16px;">
+              <img id="logoImg" src="/assets/aidar-logo-email-animated.gif" alt="Aidar Health" width="132" height="28" style="display: block; width: 132px; height: 28px; border: 0; outline: none;">
+            </div>
+            <div style="font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 12px; color: #4F7A5E; padding-top: 7px;">Breathe. Fight. Live.</div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="logo-toggle" role="radiogroup" aria-label="Logo style">
+      <span class="logo-toggle__label">Logo</span>
+      <button type="button" class="logo-opt is-active" data-logo="animated" role="radio" aria-checked="true">Animated</button>
+      <button type="button" class="logo-opt" data-logo="static" role="radio" aria-checked="false">Static</button>
+      <span class="logo-note" id="logoNote">Shimmers in Gmail &amp; Apple Mail · static in Outlook</span>
+    </div>
+
+    <div class="actions">
+      <button class="btn--primary" id="copyBtn">Copy signature</button>
+      <button class="btn--ghost" id="copyHtmlBtn">Copy raw HTML</button>
+    </div>
+
+    <details>
+      <summary>View / edit raw HTML</summary>
+      <textarea id="rawHtml" spellcheck="false" readonly></textarea>
+    </details>
+  </div>
+
+  <!-- ====================== SETUP STEPS ====================== -->
+  <div class="card">
+    <p class="card__label">Put it in Gmail</p>
+    <ol class="steps">
+      <li>Click <strong>Copy signature</strong> above (it copies the formatted version, images and all).</li>
+      <li>In Gmail, open <strong>Settings → See all settings → General</strong> and scroll to <strong>Signature</strong>.</li>
+      <li>Create a signature (or pick an existing one), click into the box, and <strong>paste</strong> (⌘V / Ctrl+V).</li>
+      <li>Scroll down and click <strong>Save Changes</strong>. Send yourself a test email to confirm the images load.</li>
+    </ol>
+    <p style="font-size: 13px; color: var(--ink-muted); margin-top: 8px;">Tip: if an image shows as broken, it usually means that file is not yet uploaded to <code>/assets/</code> on the live site — see the status banner at the top of this page.</p>
+  </div>
+
+  <p class="foot">This page lives at <a href="https://www.sathyaelumalai.com/email-signature">sathyaelumalai.com/email-signature</a> and is hidden from search engines.</p>
+
+</div>
+
+<script>
+  // The production origin the copied signature must point at (email needs absolute URLs).
+  const ABSOLUTE_BASE = "https://www.sathyaelumalai.com";
+
+  const ASSETS = {
+    portrait: "/assets/sathya-portrait.png",
+    logoAnimated: "/assets/aidar-logo-email-animated.gif",
+    logoStatic: "/assets/aidar-logo-email.png"
+  };
+
+  // ---- Plain-text fallback (for clients that ignore the HTML part) ----
+  const PLAIN = [
+    "Sathya Elumalai",
+    "Founder & CEO, Aidar Health",
+    "Digital Medicine Pioneer · Inventor of MouthLab",
+    "contact@aidar.com | sathyaelumalai.com",
+    "LinkedIn: linkedin.com/in/sathyaelumalai | X: @SathyaElumalai"
+  ].join("\n");
+
+  const sigEl   = document.getElementById("signature");
+  const logoImg = document.getElementById("logoImg");
+  const rawTa   = document.getElementById("rawHtml");
+
+  // Take the live preview markup and rewrite root-relative /assets/ paths to
+  // absolute https:// URLs so the signature renders in any inbox.
+  function getSigHtml() {
+    return sigEl.innerHTML
+      .replace(/src="\/assets\//g, 'src="' + ABSOLUTE_BASE + '/assets/')
+      .trim();
+  }
+
+  function syncRaw() { rawTa.value = getSigHtml(); }
+  syncRaw();
+
+  // ---- Rich copy: writes both text/html and text/plain to the clipboard ----
+  async function copyRich() {
+    const html = getSigHtml();
+    try {
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          "text/html": new Blob([html], { type: "text/html" }),
+          "text/plain": new Blob([PLAIN], { type: "text/plain" })
+        })
+      ]);
+      return true;
+    } catch (e) {
+      // Fallback: select the rendered node and use execCommand
+      try {
+        const range = document.createRange();
+        range.selectNode(sigEl);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        const ok = document.execCommand("copy");
+        sel.removeAllRanges();
+        return ok;
+      } catch (e2) { return false; }
+    }
+  }
+
+  // ---- Logo style toggle (animated GIF vs static PNG) ----
+  const logoNote = document.getElementById("logoNote");
+  document.querySelectorAll(".logo-opt").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".logo-opt").forEach((b) => {
+        const on = b === btn;
+        b.classList.toggle("is-active", on);
+        b.setAttribute("aria-checked", on ? "true" : "false");
+      });
+      const animated = btn.dataset.logo === "animated";
+      logoImg.src = animated ? ASSETS.logoAnimated : ASSETS.logoStatic;
+      logoNote.textContent = animated
+        ? "Shimmers in Gmail & Apple Mail · static in Outlook"
+        : "Identical everywhere · lighter file";
+      syncRaw();
+    });
+  });
+
+  function flash(btn, msg) {
+    const original = btn.textContent;
+    btn.textContent = msg;
+    btn.classList.add("is-done");
+    setTimeout(() => { btn.textContent = original; btn.classList.remove("is-done"); }, 2200);
+  }
+
+  document.getElementById("copyBtn").addEventListener("click", async (e) => {
+    const ok = await copyRich();
+    flash(e.target, ok ? "✓ Copied — paste into Gmail" : "Press ⌘C to copy");
+  });
+
+  document.getElementById("copyHtmlBtn").addEventListener("click", async (e) => {
+    try {
+      await navigator.clipboard.writeText(getSigHtml());
+      flash(e.target, "✓ HTML copied");
+    } catch (err) {
+      rawTa.closest("details").open = true;
+      rawTa.select();
+      flash(e.target, "Select & copy below");
+    }
+  });
+
+  // ---- Live hosting check: probe both image URLs and report ----
+  function probe(url) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = url + "?t=" + (performance.now() | 0); // cache-bust
+    });
+  }
+
+  (async () => {
+    const status = document.getElementById("status");
+    const dot = document.getElementById("statusDot");
+    const text = document.getElementById("statusText");
+    const checks = [
+      ["assets/sathya-portrait.png", ASSETS.portrait],
+      ["assets/aidar-logo-email-animated.gif", ASSETS.logoAnimated],
+      ["assets/aidar-logo-email.png", ASSETS.logoStatic]
+    ];
+    const results = await Promise.all(checks.map(([, url]) => probe(url)));
+    const missing = checks.filter((_, i) => !results[i]).map(([name]) => "<code>" + name + "</code>");
+
+    status.classList.remove("status--checking");
+    if (missing.length === 0) {
+      status.classList.add("status--ok");
+      dot.textContent = "✓";
+      text.innerHTML = "<b>All images are live.</b> Your signature is ready to copy — the portrait and Aidar logo will render in every inbox.";
+    } else {
+      status.classList.add("status--missing");
+      dot.textContent = "!";
+      text.innerHTML = "<b>Not reachable yet:</b> " + missing.join(", ") +
+        ". Make sure " + (missing.length > 1 ? "these files are" : "this file is") +
+        " in the site's <code>/assets/</code> folder and pushed to GitHub. Until then, " +
+        (missing.length > 1 ? "they" : "it") + " will show as a broken image in email.";
+    }
+  })();
+</script>
+</body>
+</html>
