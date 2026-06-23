@@ -2801,3 +2801,126 @@
   .connect-options { grid-template-columns: 1fr; }
 }
 
+/* ============================================================
+   PHASE 2 — VITAL-SIGNAL MOTIF (signature heartbeat divider)
+   ============================================================ */
+.vital-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: min(880px, 86%);
+  margin-inline: auto;
+  height: 64px;
+  pointer-events: none;
+}
+.vital-divider__line { flex: 1; height: 1px; }
+.vital-divider__line--l { background: linear-gradient(90deg, transparent, rgba(10,37,64,0.18)); }
+.vital-divider__line--r { background: linear-gradient(90deg, rgba(10,37,64,0.18), transparent); }
+.vital-divider__glyph { width: 124px; height: 40px; flex: 0 0 auto; overflow: visible; }
+.vital-divider__trace {
+  fill: none;
+  stroke: rgba(10,37,64,0.18);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.vital-divider__beat {
+  fill: none;
+  stroke: var(--pulse);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 180;
+  stroke-dashoffset: 180;
+  filter: drop-shadow(0 0 4px rgba(229,103,58,0.45));
+  animation: vitalBeat 3.6s var(--ease-std) infinite;
+}
+@keyframes vitalBeat {
+  0%   { stroke-dashoffset: 180; opacity: 0; }
+  8%   { opacity: 1; }
+  38%  { stroke-dashoffset: 0; opacity: 1; }
+  60%  { stroke-dashoffset: -180; opacity: 1; }
+  72%  { stroke-dashoffset: -180; opacity: 0; }
+  100% { stroke-dashoffset: -180; opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vital-divider__beat { animation: none; stroke-dashoffset: 0; opacity: 0.85; }
+}
+
+/* ============================================================
+   PHASE 3 — "EARLY DETECTION IS A HUMAN RIGHT" MANIFESTO
+   ============================================================ */
+.manifesto {
+  background: linear-gradient(180deg, #FCFAF6 0%, #F2EADC 100%);
+  padding: clamp(96px, 14vw, 184px) var(--gutter-px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.manifesto::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(78% 58% at 50% 0%, rgba(229,103,58,0.07), transparent 68%);
+  pointer-events: none;
+}
+.manifesto__inner { position: relative; max-width: 940px; margin-inline: auto; }
+.manifesto__beat { width: 104px; height: 34px; margin: 0 auto 26px; display: block; overflow: visible; }
+.manifesto__eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--t-micro); letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-muted); font-weight: 600; margin-bottom: 22px;
+}
+.manifesto__statement {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 6.6vw, 92px);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  color: var(--anchor);
+  margin-bottom: 30px;
+}
+.manifesto__statement em { font-style: italic; color: var(--pulse); }
+.manifesto__sub {
+  font-family: var(--font-body);
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 60ch;
+  margin-inline: auto;
+}
+
+/* ============================================================
+   PHASE 3 — UNIFIED IMAGE SYSTEM (one grade, one hover, one rhythm)
+   ============================================================ */
+:root { --img-grade: saturate(0.94) contrast(1.04); --img-zoom: 1.045; }
+
+/* one consistent color grade across all photographic media */
+.mission-story__photo img,
+.press-gallery__item img,
+.video-card__thumb img,
+.speaking__hero img { filter: var(--img-grade); }
+
+/* contained, consistent hover-zoom — incl. mission photo & podcast covers, which were static */
+.mission-story__photo,
+.podcast-card__cover { overflow: hidden; }
+.mission-story__photo img,
+.podcast-card__cover img {
+  transition: transform 0.7s var(--ease-out-expo);
+  will-change: transform;
+}
+.mission-story__photo:hover img,
+.podcast-card:hover .podcast-card__cover img { transform: scale(var(--img-zoom)); }
+
+/* normalize the already-present hover zooms to the same scale */
+.press-gallery__item:hover img,
+.video-card:hover .video-card__thumb img { transform: scale(var(--img-zoom)); }
+
+/* livelier press marquee (was 72s) */
+.press-gallery__track { animation-duration: 54s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mission-story__photo img,
+  .podcast-card__cover img { transition: none; }
+}
+
