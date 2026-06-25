@@ -1469,10 +1469,19 @@
    CONNECT — §5.7
    ============================================================ */
 .connect {
-  background: var(--anchor);
+  background: linear-gradient(165deg, #0C2C4C 0%, #071B2E 100%);
   color: var(--bone);
   padding-block: var(--section-py);
+  position: relative;
+  overflow: hidden;
 }
+.connect::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(58% 68% at 50% 0%, rgba(229,103,58,0.10), transparent 62%);
+  pointer-events: none;
+}
+.connect__inner { position: relative; z-index: 1; }
 .connect__inner {
   max-width: 920px;
   margin-inline: auto;
@@ -2001,7 +2010,7 @@
    JOURNEY — compact horizontal rail
    ============================================================ */
 .journey {
-  background: var(--bone);
+  background: var(--bone-soft);
   color: var(--ink);
   padding-block: clamp(64px, 8vw, 104px);
   position: relative;
@@ -2852,7 +2861,8 @@
    PHASE 3 — "EARLY DETECTION IS A HUMAN RIGHT" MANIFESTO
    ============================================================ */
 .manifesto {
-  background: linear-gradient(180deg, #FCFAF6 0%, #F2EADC 100%);
+  background: linear-gradient(180deg, #F4EBDB 0%, #EBDFC9 100%);
+  border-top: 1px solid rgba(10,37,64,0.09);
   padding: clamp(96px, 14vw, 184px) var(--gutter-px);
   text-align: center;
   position: relative;
