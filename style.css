@@ -1469,7 +1469,7 @@
    CONNECT — §5.7
    ============================================================ */
 .connect {
-  background: linear-gradient(160deg, #1A1D22 0%, #0D0F13 100%);
+  background: var(--anchor);
   color: var(--bone);
   padding-block: var(--section-py);
   position: relative;
@@ -2938,7 +2938,7 @@
    PHASE 3 (impact) — CREED / THESIS full-screen moment
    ============================================================ */
 .creed {
-  background: linear-gradient(180deg, #0A2540 0%, #05131F 100%);
+  background: linear-gradient(160deg, #1A1D22 0%, #0D0F13 100%);
   color: var(--bone);
   padding: clamp(110px, 18vw, 220px) var(--gutter-px);
   text-align: center;
