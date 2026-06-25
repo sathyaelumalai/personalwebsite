@@ -1469,7 +1469,7 @@
    CONNECT — §5.7
    ============================================================ */
 .connect {
-  background: linear-gradient(165deg, #0C2C4C 0%, #071B2E 100%);
+  background: linear-gradient(160deg, #1A1D22 0%, #0D0F13 100%);
   color: var(--bone);
   padding-block: var(--section-py);
   position: relative;
@@ -2861,7 +2861,7 @@
    PHASE 3 — "EARLY DETECTION IS A HUMAN RIGHT" MANIFESTO
    ============================================================ */
 .manifesto {
-  background: linear-gradient(180deg, #F4EBDB 0%, #EBDFC9 100%);
+  background: linear-gradient(180deg, #F7F3EC 0%, #F1EBDF 100%);
   border-top: 1px solid rgba(10,37,64,0.09);
   padding: clamp(96px, 14vw, 184px) var(--gutter-px);
   text-align: center;
